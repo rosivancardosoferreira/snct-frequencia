@@ -14,7 +14,6 @@ const styleSafe = StyleSheet.create({
 const App = () => {
   return (
     <SafeAreaView style={styleSafe.containerSafeArea}>
-      <StatusBar barStyle="light-content" backgroundColor={"red"} />
       <NavigationContainer>
         <ThemeProvider theme={theme}>
           <AppMainRoutes />
