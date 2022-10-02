@@ -2,7 +2,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 export type RootStackParamList = {
   Home: undefined;
-  ListActivity: undefined;
+  ListAllActivity: undefined;
 };
 
 export type IRouterProps = StackNavigationProp<
