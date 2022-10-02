@@ -9,19 +9,20 @@ import {
   HeaderActivityBack,
   HeaderActivityTitle
 } from "./style";
+import { iPressable } from "_types/iPressable";
 
 export function HeaderActivity({ title }: iHeaderActivity) {
   const navigation = useNavigation<IRouterProps>();
   return (
     <ContainerHeaderActivity>
       <Pressable onPress={() => navigation.goBack()}>
-        {({ pressed }: { pressed: boolean }) => (
+        {({ pressed }: iPressable) => (
           <HeaderActivityBack pressed={pressed}>
             <IconBack />
           </HeaderActivityBack>
         )}
       </Pressable>
-      <HeaderActivityTitle>{title}</HeaderActivityTitle>
+      <HeaderActivityTitle numberOfLines={1}>{title}</HeaderActivityTitle>
     </ContainerHeaderActivity>
   );
 }

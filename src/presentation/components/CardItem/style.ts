@@ -1,11 +1,19 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
+import { iPressable } from "_types/iPressable";
 
-export const ContainerCardItem = styled.View`
-  border: 1px solid ${({ theme }) => theme.colors.secondaryGray};
-  background-color: ${({ theme }) => theme.colors.primaryWhite};
-  border-radius: 10px;
-  margin-bottom: 10px;
-  padding: 20px 10px;
+const ContainerCardItemPressed = css`
+  background-color: #f5fffa;
+`;
+
+export const ContainerCardItem = styled.View<iPressable>`
+  ${({ pressed, theme }) => css`
+    border: 1px solid ${theme.colors.secondaryGray};
+    background-color: ${theme.colors.primaryWhite};
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 20px 10px;
+    ${pressed && ContainerCardItemPressed};
+  `};
 `;
 
 export const CardTitle = styled.Text`

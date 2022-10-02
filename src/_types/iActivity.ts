@@ -14,4 +14,5 @@ export interface iCardItem {
   title: string;
   type: string;
   times: iTimes[];
+  id_session: number;
 }

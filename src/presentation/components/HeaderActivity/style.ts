@@ -4,21 +4,25 @@ export const ContainerHeaderActivity = styled.View`
   background-color: ${({ theme }) => theme.colors.primaryWhite};
   border-bottom-width: 1px;
   border-color: ${({ theme }) => theme.colors.primaryGray};
-  padding: 15px 0;
+  padding: 15px;
   flex-direction: row;
   align-items: center;
 `;
 
 const ButtonPressed = css`
-  background-color: ${({ theme }) => theme.colors.primaryGray}; ;
+  background-color: ${({ theme }) => theme.colors.primaryGray};
 `;
 
 export const HeaderActivityBack = styled.View<{ pressed: boolean }>`
   ${({ pressed }) => css`
-    border-radius: 10px;
-    padding: 2px 10px;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
     border: 1px solid transparent;
-    ${pressed && ButtonPressed}
+    ${pressed && ButtonPressed};
+    align-items: center;
+    justify-content: center;
+    margin-left: -10px;
   `};
 `;
 
@@ -26,5 +30,6 @@ export const HeaderActivityTitle = styled.Text`
   color: ${({ theme }) => theme.colors.primaryDark};
   font-size: 20px;
   font-weight: 600;
-  margin-left: 10px;
+  margin-left: 5px;
+  flex: 1;
 `;

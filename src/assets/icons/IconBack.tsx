@@ -8,10 +8,12 @@ export function IconBack() {
       viewBox="0 0 24 24"
       width={32}
       height={32}
-      fill="#1F1F1F"
     >
       <Path fill="none" d="M0 0h24v24H0z" />
-      <Path d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z" />
+      <Path
+        d="M10.828 12l4.95 4.95-1.414 1.414L8 12l6.364-6.364 1.414 1.414z"
+        fill="rgba(31,31,31,1)"
+      />
     </Svg>
   );
 }

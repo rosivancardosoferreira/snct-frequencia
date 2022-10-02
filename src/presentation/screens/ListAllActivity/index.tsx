@@ -23,6 +23,7 @@ export function ListAllActivity() {
               title={item.title}
               type={item.type}
               times={item.times}
+              id_session={item.id_session}
             />
           )}
         />

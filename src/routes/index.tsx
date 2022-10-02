@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home, ListAllActivity } from "presentation/screens";
+import { Home, Identify, ListAllActivity } from "presentation/screens";
 
 const MainStack = createStackNavigator();
 
@@ -12,6 +12,7 @@ export function AppMainRoutes() {
     >
       <MainStack.Screen name="Home" component={Home} />
       <MainStack.Screen name="ListAllActivity" component={ListAllActivity} />
+      <MainStack.Screen name="Identify" component={Identify} />
     </MainStack.Navigator>
   );
 }

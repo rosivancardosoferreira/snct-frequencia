@@ -25,7 +25,7 @@ export function Home() {
         <HomeSubTitle>Registro de presença.</HomeSubTitle>
       </HomeBoxHeader>
       <HomeBoxBody>
-        <Pressable onPress={() => navigation.push("ListAllActivity")}>
+        <Pressable onPress={() => navigation.navigate("ListAllActivity")}>
           {({ pressed }: iPressable) => (
             <HomeBox pressed={pressed}>
               <HomeCardTitle>Todas atividades</HomeCardTitle>
@@ -33,7 +33,7 @@ export function Home() {
             </HomeBox>
           )}
         </Pressable>
-        <Pressable onPress={() => navigation.push("ListAllActivity")}>
+        <Pressable onPress={() => navigation.navigate("ListAllActivity")}>
           {({ pressed }: iPressable) => (
             <HomeBoxToday pressed={pressed}>
               <HomeCardTitle>Atividades{"\n"}de hoje</HomeCardTitle>

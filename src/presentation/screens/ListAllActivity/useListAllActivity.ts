@@ -22,8 +22,6 @@ export function useListAllActivity() {
     try {
       const result = await serviceAllActivitys();
       dispatch(resetAwaitRequest());
-      console.log(">>>>>>>>>>>>>>>>>>\n\n\n\n\n\n\n");
-      console.log(JSON.stringify(result.data.data, null, 2));
       dispatch(changeAllActivitys(result.data.data));
     } catch (e: any) {
       dispatch(changeAwaitRequest({ type: "error", isOpen: true }));
