@@ -12,15 +12,17 @@ import {
 } from "./style";
 import { useAwaitRequest } from "./useAwaitRequest";
 
-export function AwaitRequest({ type, onPress }: iAwaitRequest) {
+export function AwaitRequest({ type, onPress, isOpen }: iAwaitRequest) {
   const { typeColors, typeMessage } = useAwaitRequest();
   const { title, subTitle } = typeMessage({ type });
   const { statusColor, background } = typeColors({ type });
   const shouldRenderSpinner = type === "await";
   const isError = type === "error";
   return (
-    <Modal animationType="fade" transparent={true} visible={true}>
-      <StatusBar barStyle="light-content" backgroundColor={statusColor} />
+    <Modal animationType="fade" transparent={true} visible={isOpen}>
+      {isOpen && (
+        <StatusBar barStyle="light-content" backgroundColor={statusColor} />
+      )}
       <ContainerAwaitRequest color={background}>
         {shouldRenderSpinner && (
           <RequestSpinner>

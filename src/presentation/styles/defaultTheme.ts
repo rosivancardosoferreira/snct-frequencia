@@ -8,7 +8,8 @@ const themes = {
     darkBlue: "#03A9D5",
     primaryRed: "#FF1744",
     darkRed: "#EF012F",
-    primaryGreen: "#2DD8AF"
+    primaryGreen: "#2DD8AF",
+    primaryGray: "#D7D7D7"
   }
 };
 

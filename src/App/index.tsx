@@ -1,7 +1,7 @@
 import React from "react";
 import { AppMainRoutes } from "routes";
 import { NavigationContainer } from "@react-navigation/native";
-import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { ThemeProvider } from "styled-components";
 import theme from "presentation/styles/defaultTheme";
 
