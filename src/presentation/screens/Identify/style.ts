@@ -2,21 +2,28 @@ import styled from "styled-components/native";
 
 export const ContainerIdentify = styled.View`
   flex: 1;
+  background-color: ${({ theme }) => theme.colors.secondaryWhite};
+
+  border: 1px solid green;
 `;
 
 export const IdentifyHeader = styled.View`
   padding: 15px;
-  background-color: ${({ theme }) => theme.colors.primaryWhite};
 `;
 
 export const IdentifyHeaderTitle = styled.Text`
   color: ${({ theme }) => theme.colors.primaryDark};
+  padding-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+`;
+
+export const IdentifyFooterTitle = styled(IdentifyHeaderTitle)`
+  margin-top: 10px;
+  border-bottom-width: 1px;
+  border-color: ${({ theme }) => theme.colors.primaryGray};
   font-size: 20px;
   font-weight: 500;
-  border-bottom-width: 1px;
-  margin-top: 10px;
-  padding-bottom: 10px;
-  border-color: ${({ theme }) => theme.colors.primaryGray};
 `;
 
 export const IdentifyHeaderDays = styled.Text`
@@ -34,8 +41,30 @@ export const IdentifyHeaderInfos = styled.Text`
   margin-top: 7px;
 `;
 
-export const IdentifyBody = styled.View`
-  background-color: ${({ theme }) => theme.colors.secondaryWhite};
+export const IdentifySearch = styled.View``;
+
+export const IdentifyTextInput = styled.TextInput`
+  border: 1px solid ${({ theme }) => theme.colors.secondaryGray};
+  padding: 10px 45px 10px 10px;
+  color: ${({ theme }) => theme.colors.primaryDark};
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+`;
+
+export const IdentifyIconSearch = styled.View`
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  top: 0;
+  right: 15px;
+  justify-content: center;
+`;
+
+export const IdentifyFooter = styled.View`
   padding: 15px;
-  flex: 1;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.primaryWhite};
 `;

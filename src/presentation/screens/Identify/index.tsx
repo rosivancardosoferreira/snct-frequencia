@@ -1,18 +1,23 @@
 import React, { Fragment } from "react";
 import Moment from "moment";
-import { Pressable } from "react-native";
+import { Pressable, TextInput } from "react-native";
 import { useIdentify } from "./useIdentify";
 import { HeaderActivityBack } from "presentation/components/HeaderActivity/style";
-import { IconBack } from "assets/icons";
+import { IconBack, IconSearch } from "assets/icons";
 import { iPressable } from "_types/iPressable";
 import {
   ContainerIdentify,
-  IdentifyBody,
+  IdentifyFooter,
+  IdentifyFooterTitle,
   IdentifyHeader,
   IdentifyHeaderDays,
   IdentifyHeaderInfos,
-  IdentifyHeaderTitle
+  IdentifyHeaderTitle,
+  IdentifyIconSearch,
+  IdentifySearch,
+  IdentifyTextInput
 } from "./style";
+import themes from "presentation/styles/defaultTheme";
 
 export function Identify() {
   const { id_session, titleActivity, timesActivity, shouldRenderDays, goBack } =
@@ -28,7 +33,22 @@ export function Identify() {
             </HeaderActivityBack>
           )}
         </Pressable>
-        <IdentifyHeaderTitle>{titleActivity}</IdentifyHeaderTitle>
+        <IdentifyHeaderTitle>Identificação participante</IdentifyHeaderTitle>
+        <IdentifySearch>
+          <IdentifyTextInput
+            placeholderTextColor={themes.colors.secondaryGray}
+            cursorColor={themes.colors.secondaryDark}
+            placeholder="Identificação"
+            keyboardType="numeric"
+          />
+          <IdentifyIconSearch>
+            <IconSearch />
+          </IdentifyIconSearch>
+        </IdentifySearch>
+        <TextInput keyboardType="number-pad" />
+      </IdentifyHeader>
+      <IdentifyFooter>
+        <IdentifyFooterTitle>{titleActivity}</IdentifyFooterTitle>
         {timesActivity.map(({ id_time, date, start_time, end_time }, index) => (
           <Fragment key={id_time}>
             {shouldRenderDays && (
@@ -39,10 +59,7 @@ export function Identify() {
             </IdentifyHeaderInfos>
           </Fragment>
         ))}
-      </IdentifyHeader>
-      <IdentifyBody>
-        <IdentifyHeaderInfos>IDENTIFICAR</IdentifyHeaderInfos>
-      </IdentifyBody>
+      </IdentifyFooter>
     </ContainerIdentify>
   );
 }
