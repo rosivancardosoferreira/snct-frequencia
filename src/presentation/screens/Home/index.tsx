@@ -1,8 +1,10 @@
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { images } from "assets/images";
 import { AwaitRequest } from "presentation/components";
-import React from "react";
+import { Pressable } from "react-native";
 import { IRouterProps } from "_types/iNavigate";
+import { iPressable } from "_types/iPressable";
 import {
   ContainerHome,
   HomeBox,
@@ -25,14 +27,22 @@ export function Home() {
         <HomeSubTitle>Registro de presença.</HomeSubTitle>
       </HomeBoxHeader>
       <HomeBoxBody>
-        <HomeBox onPress={() => navigation.push("ListAllActivity")}>
-          <HomeCardTitle>Todas atividades</HomeCardTitle>
-          <HomeBoxImage source={images.All} resizeMode="contain" />
-        </HomeBox>
-        <HomeBoxToday>
-          <HomeCardTitle>Atividades{"\n"}de hoje</HomeCardTitle>
-          <HomeBoxImage source={images.Today} resizeMode="contain" />
-        </HomeBoxToday>
+        <Pressable onPress={() => navigation.push("ListAllActivity")}>
+          {({ pressed }: iPressable) => (
+            <HomeBox pressed={pressed}>
+              <HomeCardTitle>Todas atividades</HomeCardTitle>
+              <HomeBoxImage source={images.All} resizeMode="contain" />
+            </HomeBox>
+          )}
+        </Pressable>
+        <Pressable onPress={() => navigation.push("ListAllActivity")}>
+          {({ pressed }: iPressable) => (
+            <HomeBoxToday pressed={pressed}>
+              <HomeCardTitle>Atividades{"\n"}de hoje</HomeCardTitle>
+              <HomeBoxImage source={images.Today} resizeMode="contain" />
+            </HomeBoxToday>
+          )}
+        </Pressable>
       </HomeBoxBody>
     </ContainerHome>
   );

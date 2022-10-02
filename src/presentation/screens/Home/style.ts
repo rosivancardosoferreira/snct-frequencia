@@ -1,4 +1,5 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
+import { iPressable } from "_types/iPressable";
 
 export const ContainerHome = styled.View`
   flex: 1;
@@ -31,18 +32,28 @@ export const HomeBoxBody = styled.View`
   flex: 1;
 `;
 
-export const HomeBox = styled.Pressable`
-  border: 1px solid ${({ theme }) => theme.colors.primaryGray};
-  border-radius: 8px;
-  padding: 20px 10px;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: #e9f0fe;
+const HomeBoxEffectPress = css`
+  background-color: #c0f1fd;
 `;
 
-export const HomeBoxToday = styled(HomeBox)`
-  margin-top: 15px;
-  background-color: #ecebf2;
+export const HomeBox = styled.View<iPressable>`
+  ${({ pressed, theme }) => css`
+    border: 1px solid ${theme.colors.primaryGray};
+    border-radius: 8px;
+    padding: 20px 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #e9f0fe;
+    ${pressed && HomeBoxEffectPress};
+  `};
+`;
+
+export const HomeBoxToday = styled(HomeBox)<iPressable>`
+  ${({ pressed }) => css`
+    margin-top: 15px;
+    background-color: #ecebf2;
+    ${pressed && HomeBoxEffectPress};
+  `};
 `;
 
 export const HomeCardTitle = styled.Text`

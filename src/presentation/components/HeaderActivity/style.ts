@@ -15,7 +15,7 @@ const ButtonPressed = css`
 
 export const HeaderActivityBack = styled.View<{ pressed: boolean }>`
   ${({ pressed }) => css`
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 2px 10px;
     ${pressed && ButtonPressed}
   `};
