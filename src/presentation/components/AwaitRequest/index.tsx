@@ -12,12 +12,11 @@ import {
 } from "./style";
 import { useAwaitRequest } from "./useAwaitRequest";
 
-export function AwaitRequest({ type, onPress, isOpen }: iAwaitRequest) {
-  const { typeColors, typeMessage } = useAwaitRequest();
-  const { title, subTitle } = typeMessage({ type });
-  const { statusColor, background } = typeColors({ type });
-  const shouldRenderSpinner = type === "await";
-  const isError = type === "error";
+export function AwaitRequest({ onPress }: iAwaitRequest) {
+  const { typeColors, typeMessage, shouldRenderSpinner, isError, isOpen } =
+    useAwaitRequest();
+  const { title, subTitle } = typeMessage();
+  const { statusColor, background } = typeColors();
   return (
     <Modal animationType="fade" transparent={true} visible={isOpen}>
       {isOpen && (

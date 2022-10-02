@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { serviceAllActivitys } from "services/activitys";
+import {
+  changeAwaitRequest,
+  resetAwaitRequest
+} from "store/slices/awaitRequest";
 
 export function useListAllActivity() {
-  const [isRequest, setIsRequest] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("chaam");
     async function getAllActivity() {
-      setIsRequest(true);
+      dispatch(changeAwaitRequest({ type: "await", isOpen: true }));
       await serviceAllActivitys();
-      setIsRequest(false);
+      dispatch(resetAwaitRequest());
     }
     getAllActivity();
-  }, []);
+  }, [dispatch]);
 
-  return {
-    isRequest
-  };
+  return 0;
 }

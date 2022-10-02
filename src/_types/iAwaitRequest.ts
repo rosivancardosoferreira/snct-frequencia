@@ -1,13 +1,18 @@
-export interface iAwaitRequest {
+export interface iAwaitRequestCommon {
   type: "await" | "success" | "error";
-  onPress?: () => void;
   isOpen: boolean;
 }
+export interface iAwaitRequest {
+  onPress?: () => void;
+}
 
-export interface iTypeStatusBar extends Pick<iAwaitRequest, "type"> {}
+export interface iTypeStatusBar extends Pick<iAwaitRequestCommon, "type"> {}
 
-export interface iTypeMessage extends Pick<iAwaitRequest, "type"> {}
+export interface iTypeMessage extends Pick<iAwaitRequestCommon, "type"> {}
 
 export interface iUIAwaitRequest {
   color: string;
 }
+
+export interface iSliceAwaitRequest
+  extends Pick<iAwaitRequestCommon, "type" | "isOpen"> {}

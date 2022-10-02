@@ -9,11 +9,11 @@ import { useListAllActivity } from "./useListAllActivity";
 
 export function ListAllActivity() {
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const { isRequest } = useListAllActivity();
+  useListAllActivity();
   return (
     <ContainerListAllActivity>
       <HeaderActivity title="Todas atividades" />
-      <AwaitRequest type="success" isOpen={isRequest} />
+      <AwaitRequest />
       <ListActivityBody>
         {data.map((_, index) => (
           <CardItem

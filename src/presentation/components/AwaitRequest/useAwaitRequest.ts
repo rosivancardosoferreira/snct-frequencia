@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import themes from "presentation/styles/defaultTheme";
-import { iTypeMessage, iTypeStatusBar } from "_types/iAwaitRequest";
+import { selectAwaitRequest } from "store/slices/awaitRequest";
 
 export function useAwaitRequest() {
+  const { type, isOpen } = useSelector(selectAwaitRequest);
   const messages = {
     await: {
       title: "Aguarde",
@@ -31,13 +33,19 @@ export function useAwaitRequest() {
     }
   };
 
-  function typeColors({ type }: iTypeStatusBar) {
+  function typeColors() {
     return colorsStatusBar[type];
   }
 
-  function typeMessage({ type }: iTypeMessage) {
+  function typeMessage() {
     return messages[type];
   }
 
-  return { typeColors, typeMessage };
+  return {
+    typeColors,
+    typeMessage,
+    shouldRenderSpinner: type === "await",
+    isError: type === "error",
+    isOpen
+  };
 }
