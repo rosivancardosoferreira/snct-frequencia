@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import themes from "presentation/styles/defaultTheme";
 import { selectAwaitRequest } from "store/slices/awaitRequest";
+import themes from "presentation/styles/defaultTheme";
 
 export function useAwaitRequest() {
   const { type, isOpen } = useSelector(selectAwaitRequest);
