@@ -1,15 +1,17 @@
 import { CardItem, HeaderActivity } from "presentation/components";
 import React from "react";
-import { ContainerListAllActivity } from "./style";
+import { ContainerListAllActivity, ListActivityBody } from "./style";
 
 export function ListAllActivity() {
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <ContainerListAllActivity>
       <HeaderActivity title="Todas atividades" />
-      {data.map(() => (
-        <CardItem />
-      ))}
+      <ListActivityBody>
+        {data.map(() => (
+          <CardItem title="Nome da atividade aqui, nomes grandes também não devem tralalaal" />
+        ))}
+      </ListActivityBody>
     </ContainerListAllActivity>
   );
 }

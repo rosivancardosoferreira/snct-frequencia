@@ -9,7 +9,8 @@ const themes = {
     primaryRed: "#FF1744",
     darkRed: "#EF012F",
     primaryGreen: "#2DD8AF",
-    primaryGray: "#D7D7D7"
+    primaryGray: "#D7D7D7",
+    secondaryGray: "#ADACAC"
   }
 };
 

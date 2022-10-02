@@ -4,7 +4,7 @@ export const ContainerHeaderActivity = styled.View`
   background-color: ${({ theme }) => theme.colors.primaryWhite};
   border-bottom-width: 1px;
   border-color: ${({ theme }) => theme.colors.primaryGray};
-  padding: 15px;
+  padding: 15px 0;
   flex-direction: row;
   align-items: center;
 `;
@@ -15,8 +15,9 @@ const ButtonPressed = css`
 
 export const HeaderActivityBack = styled.View<{ pressed: boolean }>`
   ${({ pressed }) => css`
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 2px 10px;
+    border: 1px solid transparent;
     ${pressed && ButtonPressed}
   `};
 `;
