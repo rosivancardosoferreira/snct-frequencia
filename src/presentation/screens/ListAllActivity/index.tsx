@@ -1,26 +1,31 @@
 import React from "react";
+import { ContainerListAllActivity, ListActivityBody } from "./style";
+import { useListAllActivity } from "./useListAllActivity";
 import {
   AwaitRequest,
   CardItem,
   HeaderActivity
 } from "presentation/components";
-import { ContainerListAllActivity, ListActivityBody } from "./style";
-import { useListAllActivity } from "./useListAllActivity";
+import { FlatList } from "react-native";
 
 export function ListAllActivity() {
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  useListAllActivity();
+  const { onActionRequest, dataAllactivitys } = useListAllActivity();
   return (
     <ContainerListAllActivity>
-      <HeaderActivity title="Todas atividades" />
-      <AwaitRequest />
+      <AwaitRequest onPress={onActionRequest} />
+      <HeaderActivity title={"Todas atividades"} />
       <ListActivityBody>
-        {data.map((_, index) => (
-          <CardItem
-            key={index}
-            title="Nome da atividade aqui, nomes grandes também não devem tralalaal"
-          />
-        ))}
+        <FlatList
+          data={dataAllactivitys}
+          renderItem={({ item }) => (
+            <CardItem
+              key={item.id_session}
+              title={item.title}
+              type={item.type}
+              times={item.times}
+            />
+          )}
+        />
       </ListActivityBody>
     </ContainerListAllActivity>
   );

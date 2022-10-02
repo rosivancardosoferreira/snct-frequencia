@@ -17,6 +17,7 @@
     "D": "^1.0.0",
     "axios": "^0.27.2",
     "babel-plugin-module-resolver": "^4.1.0",
+    "moment": "^2.29.4",
     "react": "18.1.0",
     "react-native": "0.70.1",
     "react-native-config": "^1.4.6",

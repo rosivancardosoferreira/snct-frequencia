@@ -28,3 +28,10 @@ export const CardText = styled.Text`
   font-weight: 400;
   margin-left: 5px;
 `;
+
+export const CardTextDays = styled(CardText)`
+  margin: 5px 0;
+  padding-top: 3px;
+  border-top-width: 1px;
+  border-color: ${({ theme }) => theme.colors.secondaryGray};
+`;

@@ -1,23 +1,50 @@
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { serviceAllActivitys } from "services/activitys";
+
 import {
   changeAwaitRequest,
   resetAwaitRequest
 } from "store/slices/awaitRequest";
+import {
+  changeAllActivitys,
+  selectAllActivitys
+} from "store/slices/allActivitys";
 
 export function useListAllActivity() {
   const dispatch = useDispatch();
+  const dataAllactivitys = useSelector(selectAllActivitys);
+  const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    console.log("chaam");
-    async function getAllActivity() {
-      dispatch(changeAwaitRequest({ type: "await", isOpen: true }));
-      await serviceAllActivitys();
+  const getAllActivity = useCallback(async () => {
+    dispatch(changeAwaitRequest({ type: "await", isOpen: true }));
+    try {
+      const result = await serviceAllActivitys();
       dispatch(resetAwaitRequest());
+      console.log(">>>>>>>>>>>>>>>>>>\n\n\n\n\n\n\n");
+      console.log(JSON.stringify(result.data.data, null, 2));
+      dispatch(changeAllActivitys(result.data.data));
+    } catch (e: any) {
+      dispatch(changeAwaitRequest({ type: "error", isOpen: true }));
+      setIsError(true);
     }
-    getAllActivity();
   }, [dispatch]);
 
-  return 0;
+  useEffect(() => {
+    getAllActivity();
+  }, [getAllActivity]);
+
+  function onActionRequest() {
+    if (isError) {
+      getAllActivity();
+    }
+    return 0;
+  }
+
+  return {
+    isError,
+    onActionRequest,
+    dataAllactivitys
+  };
 }
