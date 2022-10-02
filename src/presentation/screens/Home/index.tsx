@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { images } from "assets/images";
-import { AwaitRequest } from "presentation/components";
 import { Pressable } from "react-native";
 import { IRouterProps } from "_types/iNavigate";
 import { iPressable } from "_types/iPressable";
@@ -21,7 +20,6 @@ export function Home() {
   const navigation = useNavigation<IRouterProps>();
   return (
     <ContainerHome>
-      <AwaitRequest type="success" isOpen={false} />
       <HomeBoxHeader>
         <HomeTitle>Frequência SNCT 2022</HomeTitle>
         <HomeSubTitle>Registro de presença.</HomeSubTitle>
