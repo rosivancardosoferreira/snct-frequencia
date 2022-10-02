@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home } from "presentation/screens";
+import { Home, ListAllActivity } from "presentation/screens";
 
 const MainStack = createStackNavigator();
 
@@ -11,6 +11,7 @@ export function AppMainRoutes() {
       screenOptions={{ headerShown: false }}
     >
       <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen name="ListAllActivity" component={ListAllActivity} />
     </MainStack.Navigator>
   );
 }

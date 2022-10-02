@@ -1,6 +1,8 @@
+import { useNavigation } from "@react-navigation/native";
 import { images } from "assets/images";
 import { AwaitRequest } from "presentation/components";
 import React from "react";
+import { IRouterProps } from "_types/iNavigate";
 import {
   ContainerHome,
   HomeBox,
@@ -14,6 +16,7 @@ import {
 } from "./style";
 
 export function Home() {
+  const navigation = useNavigation<IRouterProps>();
   return (
     <ContainerHome>
       <AwaitRequest type="success" isOpen={false} />
@@ -22,7 +25,7 @@ export function Home() {
         <HomeSubTitle>Registro de presença.</HomeSubTitle>
       </HomeBoxHeader>
       <HomeBoxBody>
-        <HomeBox>
+        <HomeBox onPress={() => navigation.push("ListAllActivity")}>
           <HomeCardTitle>Todas atividades</HomeCardTitle>
           <HomeBoxImage source={images.All} resizeMode="contain" />
         </HomeBox>
