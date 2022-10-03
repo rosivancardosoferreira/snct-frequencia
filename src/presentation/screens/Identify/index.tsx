@@ -19,7 +19,8 @@ import {
   IdentifyNameSuggestion,
   IdentifySearch,
   IdentifySuggestion,
-  IdentifyTextInput
+  IdentifyTextInput,
+  PressableBackStyle
 } from "./style";
 import themes from "presentation/styles/defaultTheme";
 import { AwaitRequest } from "presentation/components";
@@ -45,7 +46,7 @@ export function Identify() {
         onPress={onActionSucess}
       />
       <IdentifyHeader>
-        <Pressable onPress={goBack}>
+        <Pressable onPress={goBack} style={PressableBackStyle}>
           {({ pressed }: iPressable) => (
             <HeaderActivityBack pressed={pressed}>
               <IconBack />

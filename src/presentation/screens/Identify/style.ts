@@ -13,6 +13,10 @@ export const IdentifyHeader = styled.View`
   flex: 2;
 `;
 
+export const PressableBackStyle = {
+  width: 40
+};
+
 export const IdentifyHeaderTitle = styled.Text`
   color: ${({ theme }) => theme.colors.primaryDark};
   padding-bottom: 10px;
@@ -46,6 +50,7 @@ export const IdentifyTextInput = styled.TextInput`
   border-radius: 10px;
   font-size: 20px;
   font-weight: 400;
+  background-color: ${({ theme }) => theme.colors.primaryWhite};
 `;
 
 export const IdentifyIconSearch = styled.View`
