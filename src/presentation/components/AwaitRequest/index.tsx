@@ -12,11 +12,13 @@ import {
 } from "./style";
 import { useAwaitRequest } from "./useAwaitRequest";
 
-export function AwaitRequest({ onPress }: iAwaitRequest) {
-  const { typeColors, typeMessage, shouldRenderSpinner, isError, isOpen } =
+export function AwaitRequest({ onPress, titleFirstButton }: iAwaitRequest) {
+  const { typeColors, typeMessage, shouldRenderSpinner, isOpen } =
     useAwaitRequest();
+  const renderButtonAction = onPress;
   const { title, subTitle } = typeMessage();
   const { statusColor, background } = typeColors();
+  const titlePrimaryButton = titleFirstButton ?? "Tentar novamente";
   return (
     <Modal animationType="fade" transparent={true} visible={isOpen}>
       {isOpen && (
@@ -32,9 +34,9 @@ export function AwaitRequest({ onPress }: iAwaitRequest) {
           <RequestTitle>{title}</RequestTitle>
           <RequestSubTitle>{subTitle}</RequestSubTitle>
         </RequestBox>
-        {isError && (
+        {renderButtonAction && (
           <RequestError>
-            <Button title="Tentar novamente" onPress={onPress} />
+            <Button title={titlePrimaryButton} onPress={onPress} />
           </RequestError>
         )}
       </ContainerAwaitRequest>

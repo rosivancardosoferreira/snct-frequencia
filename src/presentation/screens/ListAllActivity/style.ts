@@ -5,6 +5,6 @@ export const ContainerListAllActivity = styled.View`
 `;
 
 export const ListActivityBody = styled.View`
-  padding: 15px;
+  padding: 15px 15px 0 15px;
   flex: 1;
 `;

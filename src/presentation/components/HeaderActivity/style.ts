@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components/native";
+import { iPressable } from "_types/iPressable";
 
 export const ContainerHeaderActivity = styled.View`
   background-color: ${({ theme }) => theme.colors.primaryWhite};
@@ -13,7 +14,7 @@ const ButtonPressed = css`
   background-color: ${({ theme }) => theme.colors.primaryGray};
 `;
 
-export const HeaderActivityBack = styled.View<{ pressed: boolean }>`
+export const HeaderActivityBack = styled.View<iPressable>`
   ${({ pressed }) => css`
     border-radius: 20px;
     width: 40px;

@@ -5,6 +5,7 @@ export interface iAwaitRequestCommon {
 
 export interface iAwaitRequest {
   onPress?: () => void;
+  titleFirstButton?: string;
 }
 
 export interface iUIAwaitRequest {
@@ -12,4 +13,7 @@ export interface iUIAwaitRequest {
 }
 
 export interface iSliceAwaitRequest
-  extends Pick<iAwaitRequestCommon, "type" | "isOpen"> {}
+  extends Pick<iAwaitRequestCommon, "type" | "isOpen"> {
+  title?: string | null;
+  message?: string | null;
+}

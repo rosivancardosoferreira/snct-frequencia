@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { serviceAllActivitys } from "services/activitys";
-
 import {
   changeAwaitRequest,
   resetAwaitRequest
@@ -36,13 +35,13 @@ export function useListAllActivity() {
   function onActionRequest() {
     if (isError) {
       getAllActivity();
+      setIsError(false);
     }
     return 0;
   }
 
   return {
-    isError,
-    onActionRequest,
-    dataAllactivitys
+    dataAllactivitys,
+    onActionRequest: isError ? onActionRequest : undefined
   };
 }

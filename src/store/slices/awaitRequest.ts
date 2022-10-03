@@ -4,7 +4,9 @@ import { RootState } from "../index";
 
 const initialState: iSliceAwaitRequest = {
   type: "await",
-  isOpen: false
+  isOpen: false,
+  title: null,
+  message: null
 };
 
 const awaitRequestSlice = createSlice({

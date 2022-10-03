@@ -3,19 +3,19 @@ import { selectAwaitRequest } from "store/slices/awaitRequest";
 import themes from "presentation/styles/defaultTheme";
 
 export function useAwaitRequest() {
-  const { type, isOpen } = useSelector(selectAwaitRequest);
+  const { type, isOpen, title, message } = useSelector(selectAwaitRequest);
   const messages = {
     await: {
-      title: "Aguarde",
-      subTitle: "Buscando dados..."
+      title: title ?? "Aguarde",
+      subTitle: message ?? "Buscando dados..."
     },
     success: {
-      title: "",
-      subTitle: ""
+      title: title ?? "Sucesso!",
+      subTitle: message ?? "Tudo certo por aqui."
     },
     error: {
-      title: "Ooops!",
-      subTitle: "Não foi possível trazer os dados."
+      title: title ?? "Ooops!",
+      subTitle: message ?? "Não foi realizar está ação."
     }
   };
   const colorsStatusBar = {
@@ -45,7 +45,6 @@ export function useAwaitRequest() {
     typeColors,
     typeMessage,
     shouldRenderSpinner: type === "await",
-    isError: type === "error",
     isOpen
   };
 }
