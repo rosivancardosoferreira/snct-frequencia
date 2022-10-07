@@ -119,3 +119,15 @@ export const IdentifyFooterTitle = styled(IdentifyHeaderTitle)`
   font-size: 20px;
   font-weight: 500;
 `;
+
+export const IdentifyQRCode = styled.View`
+  margin-top: 15px;
+  border: 1px solid gray;
+  flex-direction: row;
+  height: 50px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  width: 45%;
+`;

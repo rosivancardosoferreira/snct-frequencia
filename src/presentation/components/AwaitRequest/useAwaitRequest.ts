@@ -1,9 +1,19 @@
-import { useSelector } from "react-redux";
-import { selectAwaitRequest } from "store/slices/awaitRequest";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  resetAwaitRequest,
+  selectAwaitRequest
+} from "store/slices/awaitRequest";
 import themes from "presentation/styles/defaultTheme";
 
 export function useAwaitRequest() {
   const { type, isOpen, title, message } = useSelector(selectAwaitRequest);
+  const dispatch = useDispatch();
+  // const { type, isOpen, title, message } = {
+  //   type: "await",
+  //   isOpen: true,
+  //   title: "adsads",
+  //   message: "dsadsa"
+  // };
   const messages = {
     await: {
       title: title ?? "Aguarde",
@@ -41,9 +51,15 @@ export function useAwaitRequest() {
     return messages[type];
   }
 
+  function onDismiss() {
+    dispatch(resetAwaitRequest());
+  }
+
   return {
     typeColors,
     typeMessage,
+    onDismiss,
+    type,
     shouldRenderSpinner: type === "await",
     isOpen
   };

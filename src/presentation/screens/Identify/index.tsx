@@ -3,7 +3,7 @@ import Moment from "moment";
 import { FlatList, Keyboard, Pressable } from "react-native";
 import { useIdentify } from "./useIdentify";
 import { HeaderActivityBack } from "presentation/components/HeaderActivity/style";
-import { IconBack, IconSearch } from "assets/icons";
+import { IconBack, IconQRCode, IconSearch } from "assets/icons";
 import { iPressable } from "_types/iPressable";
 import {
   ContainerIdentify,
@@ -17,6 +17,7 @@ import {
   IdentifyIdSuggestion,
   IdentifyItemSuggestion,
   IdentifyNameSuggestion,
+  IdentifyQRCode,
   IdentifySearch,
   IdentifySuggestion,
   IdentifyTextInput,
@@ -67,6 +68,14 @@ export function Identify() {
             <IconSearch />
           </IdentifyIconSearch>
           <IdentifySuggestion isOpen={isOpenSuggestion}>
+            <Pressable>
+              {({ pressed }: iPressable) => (
+                <IdentifyQRCode>
+                  <IconQRCode />
+                  <IdentifyNameSuggestion>QRCode</IdentifyNameSuggestion>
+                </IdentifyQRCode>
+              )}
+            </Pressable>
             <FlatList
               data={suggestionParticipants}
               keyboardShouldPersistTaps="handled"

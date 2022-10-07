@@ -6,12 +6,14 @@ import { IRouterProps } from "_types/iNavigate";
 import { iPressable } from "_types/iPressable";
 import {
   ContainerHome,
+  FooterText,
   HomeBox,
   HomeBoxBody,
   HomeBoxHeader,
   HomeBoxImage,
   HomeBoxToday,
   HomeCardTitle,
+  HomeFooter,
   HomeSubTitle,
   HomeTitle
 } from "./style";
@@ -41,7 +43,26 @@ export function Home() {
             </HomeBoxToday>
           )}
         </Pressable>
+        <Pressable onPress={() => navigation.navigate("ListAllActivity")}>
+          {({ pressed }: iPressable) => (
+            <HomeBoxToday pressed={pressed}>
+              <HomeCardTitle>Prontos para{"\n"}sincronizar</HomeCardTitle>
+              <HomeBoxImage source={images.Today} resizeMode="contain" />
+            </HomeBoxToday>
+          )}
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate("ListAllActivity")}>
+          {({ pressed }: iPressable) => (
+            <HomeBoxToday pressed={pressed}>
+              <HomeCardTitle>Prontos para{"\n"}sincronizar</HomeCardTitle>
+              <HomeBoxImage source={images.Today} resizeMode="contain" />
+            </HomeBoxToday>
+          )}
+        </Pressable>
       </HomeBoxBody>
+      <HomeFooter isOnline={true}>
+        <FooterText>Você está offline</FooterText>
+      </HomeFooter>
     </ContainerHome>
   );
 }
