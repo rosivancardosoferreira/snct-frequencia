@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components/native";
+import { iUIHomeFooter } from "_types/iHome";
 import { iPressable } from "_types/iPressable";
 
 export const ContainerHome = styled.View`
@@ -26,10 +27,10 @@ export const HomeSubTitle = styled.Text`
   opacity: 0.7;
 `;
 
-export const HomeBoxBody = styled.View`
+export const HomeBoxBody = styled.ScrollView`
   background-color: ${({ theme }) => theme.colors.secondaryWhite};
-  padding: 40px 20px 0 20px;
-  flex: 1;
+  padding: 0 20px;
+  margin: 15px 0;
 `;
 
 const HomeBoxEffectPress = css`
@@ -69,4 +70,19 @@ export const HomeCardTitle = styled.Text`
 export const HomeBoxImage = styled.Image`
   width: 55%;
   height: 142px;
+`;
+
+export const HomeFooter = styled.View<iUIHomeFooter>`
+  ${({ isOnline, theme }) => css`
+    background-color: ${isOnline
+      ? theme.colors.primaryGreen
+      : theme.colors.primaryRed};
+    padding: 5px 20px;
+  `};
+`;
+
+export const FooterText = styled.Text`
+  color: ${({ theme }) => theme.colors.primaryWhite};
+  font-size: 16px;
+  font-weight: 400;
 `;
