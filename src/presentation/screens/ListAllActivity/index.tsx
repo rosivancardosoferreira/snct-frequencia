@@ -2,17 +2,16 @@ import React from "react";
 import { ContainerListAllActivity, ListActivityBody } from "./style";
 import { useListAllActivity } from "./useListAllActivity";
 import {
-  AwaitRequest,
   CardItem,
-  HeaderActivity
+  HeaderActivity,
+  ListActivityEmpty
 } from "presentation/components";
 import { FlatList } from "react-native";
 
 export function ListAllActivity() {
-  const { onActionRequest, dataAllactivitys } = useListAllActivity();
+  const { dataAllactivitys } = useListAllActivity();
   return (
     <ContainerListAllActivity>
-      <AwaitRequest onPress={onActionRequest} />
       <HeaderActivity title={"Todas atividades"} />
       <ListActivityBody>
         <FlatList
@@ -26,6 +25,7 @@ export function ListAllActivity() {
               id_session={item.id_session}
             />
           )}
+          ListEmptyComponent={() => <ListActivityEmpty />}
         />
       </ListActivityBody>
     </ContainerListAllActivity>

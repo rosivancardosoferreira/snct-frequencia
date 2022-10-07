@@ -4,6 +4,8 @@ import { images } from "assets/images";
 import { Pressable } from "react-native";
 import { IRouterProps } from "_types/iNavigate";
 import { iPressable } from "_types/iPressable";
+import { AwaitRequest } from "presentation/components";
+import { useHome } from "./useHome";
 import {
   ContainerHome,
   FooterText,
@@ -20,8 +22,11 @@ import {
 
 export function Home() {
   const navigation = useNavigation<IRouterProps>();
+  const { onActionRequest, isOnline } = useHome();
+
   return (
     <ContainerHome>
+      <AwaitRequest onPress={onActionRequest} />
       <HomeBoxHeader>
         <HomeTitle>Frequência SNCT 2022</HomeTitle>
         <HomeSubTitle>Registro de presença.</HomeSubTitle>
@@ -51,16 +56,8 @@ export function Home() {
             </HomeBoxToday>
           )}
         </Pressable>
-        <Pressable onPress={() => navigation.navigate("ListAllActivity")}>
-          {({ pressed }: iPressable) => (
-            <HomeBoxToday pressed={pressed}>
-              <HomeCardTitle>Prontos para{"\n"}sincronizar</HomeCardTitle>
-              <HomeBoxImage source={images.Today} resizeMode="contain" />
-            </HomeBoxToday>
-          )}
-        </Pressable>
       </HomeBoxBody>
-      <HomeFooter isOnline={true}>
+      <HomeFooter isOnline={isOnline}>
         <FooterText>Você está offline</FooterText>
       </HomeFooter>
     </ContainerHome>
