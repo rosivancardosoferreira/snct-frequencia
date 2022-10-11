@@ -4,7 +4,7 @@ import { images } from "assets/images";
 import { Pressable } from "react-native";
 import { IRouterProps } from "_types/iNavigate";
 import { iPressable } from "_types/iPressable";
-import { AwaitRequest } from "presentation/components";
+import { AwaitRequest, ModalAlert } from "presentation/components";
 import { useHome } from "./useHome";
 import {
   ContainerHome,
@@ -22,11 +22,12 @@ import {
 
 export function Home() {
   const navigation = useNavigation<IRouterProps>();
-  const { onActionRequest, isOnline } = useHome();
+  const { onActionRequest, isOnline, testeOpemmodal } = useHome();
 
   return (
     <ContainerHome>
       <AwaitRequest onPress={onActionRequest} />
+      <ModalAlert onAction={() => console.log("teste")} />
       <HomeBoxHeader>
         <HomeTitle>Frequência SNCT 2022</HomeTitle>
         <HomeSubTitle>Registro de presença.</HomeSubTitle>
@@ -40,7 +41,7 @@ export function Home() {
             </HomeBox>
           )}
         </Pressable>
-        <Pressable onPress={() => navigation.navigate("ListAllActivity")}>
+        {/* <Pressable onPress={testeOpemmodal}>
           {({ pressed }: iPressable) => (
             <HomeBoxToday pressed={pressed}>
               <HomeCardTitle>Atividades{"\n"}de hoje</HomeCardTitle>
@@ -55,11 +56,11 @@ export function Home() {
               <HomeBoxImage source={images.Today} resizeMode="contain" />
             </HomeBoxToday>
           )}
-        </Pressable>
+        </Pressable> */}
       </HomeBoxBody>
-      <HomeFooter isOnline={isOnline}>
+      {/* <HomeFooter isOnline={isOnline}>
         <FooterText>Você está offline</FooterText>
-      </HomeFooter>
+      </HomeFooter> */}
     </ContainerHome>
   );
 }

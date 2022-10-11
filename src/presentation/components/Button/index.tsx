@@ -17,7 +17,7 @@ export function Button({
       <Pressable onPress={onPress}>
         {({ pressed }: iPressable) => (
           <ButtonInside pressed={pressed} variant={variant}>
-            <ButtonTitle>{title}</ButtonTitle>
+            <ButtonTitle variant={variant}>{title}</ButtonTitle>
           </ButtonInside>
         )}
       </Pressable>

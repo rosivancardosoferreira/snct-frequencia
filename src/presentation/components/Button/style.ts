@@ -1,20 +1,29 @@
 import styled, { css } from "styled-components/native";
-import { iUIButton, iUIButtonInside } from "_types/iButton";
+import { iUIButton, iUIButtonInside, iUIButtonTitle } from "_types/iButton";
 
-const variants = {
+const buttonVariants = {
   primary: css<iUIButtonInside>`
     ${({ pressed, theme }) => css`
       background-color: ${pressed
-        ? theme.colors.primaryGray
+        ? theme.colors.secondaryWhite
         : theme.colors.primaryWhite};
     `}
   `,
-  other: css<iUIButtonInside>`
+  blue: css<iUIButtonInside>`
     ${({ pressed, theme }) => css`
       background-color: ${pressed
-        ? theme.colors.primaryGray
-        : theme.colors.primaryWhite};
+        ? theme.colors.primaryBlue
+        : theme.colors.darkBlue};
     `}
+  `
+};
+
+const textVariants = {
+  primary: css`
+    color: ${({ theme }) => theme.colors.secondaryDark};
+  `,
+  blue: css`
+    color: ${({ theme }) => theme.colors.primaryWhite};
   `
 };
 
@@ -29,13 +38,15 @@ export const ButtonInside = styled.View<iUIButtonInside>`
   ${({ variant }) => css`
     border-radius: 8px;
     padding: 15px;
-    ${variants[variant]};
+    ${buttonVariants[variant]};
   `}
 `;
 
-export const ButtonTitle = styled.Text`
-  text-align: center;
-  color: ${({ theme }) => theme.colors.secondaryDark};
-  font-size: 20px;
-  font-weight: 600;
+export const ButtonTitle = styled.Text<iUIButtonTitle>`
+  ${({ variant }) => css`
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    ${textVariants[variant]};
+  `}
 `;

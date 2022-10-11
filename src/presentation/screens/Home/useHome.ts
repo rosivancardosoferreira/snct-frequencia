@@ -8,6 +8,7 @@ import {
   selectAwaitRequest
 } from "store/slices/awaitRequest";
 import { changeAllActivitys } from "store/slices/allActivitys";
+import { changeModalAlert } from "store/slices/modalAlert";
 
 export function useHome() {
   const dispatch = useDispatch();
@@ -31,9 +32,9 @@ export function useHome() {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    getAllActivity();
-  }, [getAllActivity]);
+  // useEffect(() => {
+  //   getAllActivity();
+  // }, [getAllActivity]);
 
   function onActionRequest() {
     if (isError) {
@@ -42,8 +43,19 @@ export function useHome() {
     return 0;
   }
 
+  function testeOpemmodal() {
+    dispatch(
+      changeModalAlert({
+        isOpen: true,
+        title: "teste",
+        message: "bora de teste"
+      })
+    );
+  }
+
   return {
     onActionRequest: isError ? onActionRequest : undefined,
-    isOnline: false
+    isOnline: false,
+    testeOpemmodal
   };
 }
