@@ -22,6 +22,8 @@ export function AwaitRequest({ onPress, titleFirstButton }: iAwaitRequest) {
     type
   } = useAwaitRequest();
   const renderButtonAction = onPress && type !== "await";
+  const renderButtonCancel = type === "error";
+
   const { title, subTitle } = typeMessage();
   const { statusColor, background } = typeColors();
   const titlePrimaryButton = titleFirstButton ?? "Tentar novamente";
@@ -43,7 +45,9 @@ export function AwaitRequest({ onPress, titleFirstButton }: iAwaitRequest) {
         {renderButtonAction && (
           <RequestError>
             <Button title={titlePrimaryButton} onPress={onPress} bottom={10} />
-            <Button title="Cancelar" onPress={onDismiss} />
+            {renderButtonCancel && (
+              <Button title="Cancelar" onPress={onDismiss} />
+            )}
           </RequestError>
         )}
       </ContainerAwaitRequest>

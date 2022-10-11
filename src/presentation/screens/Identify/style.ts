@@ -45,7 +45,7 @@ export const IdentifySearch = styled.View`
 
 export const IdentifyTextInput = styled.TextInput`
   border: 1px solid ${({ theme }) => theme.colors.secondaryGray};
-  padding: 10px 45px 10px 15px;
+  padding: 15px 45px 15px 15px;
   color: ${({ theme }) => theme.colors.primaryDark};
   border-radius: 10px;
   font-size: 20px;
@@ -55,7 +55,7 @@ export const IdentifyTextInput = styled.TextInput`
 
 export const IdentifyIconSearch = styled.View`
   position: absolute;
-  top: 12px;
+  top: 16px;
   right: 15px;
   justify-content: center;
 `;
@@ -63,9 +63,10 @@ export const IdentifyIconSearch = styled.View`
 export const IdentifySuggestion = styled.View<iUIIdentifySuggestion>`
   ${({ isOpen, theme }) => css`
     background-color: ${theme.colors.primaryWhite};
-    padding: 0px;
-    height: 0px;
+    /* padding: 0px; */
+    /* height: 0px; */
     border-radius: 8px;
+    z-index: 2;
     ${isOpen &&
     css`
       flex: 1;
@@ -120,14 +121,68 @@ export const IdentifyFooterTitle = styled(IdentifyHeaderTitle)`
   font-weight: 500;
 `;
 
-export const IdentifyQRCode = styled.View`
+export const IdentifyButtonQRCode = styled.Pressable`
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  top: 70px;
+`;
+
+export const IdentifyQRCode = styled.View<iPressable>`
+  ${({ pressed, theme }) => css`
+    border: 1px solid ${theme.colors.primaryGray};
+    border-radius: 10px;
+    flex-direction: row;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    ${pressed &&
+    css`
+      background-color: ${theme.colors.primaryWhite};
+    `};
+  `};
+`;
+
+export const IdentifyQRCodeTextButton = styled.Text`
+  color: ${({ theme }) => theme.colors.secondaryDark};
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 10px;
+`;
+
+export const SuggestionEmpty = styled.View<{ shouldRenderEmpty: boolean }>`
+  ${({ shouldRenderEmpty }) => css`
+    padding-bottom: 50px;
+    ${!shouldRenderEmpty &&
+    css`
+      display: none;
+    `};
+  `};
+`;
+
+export const SuggestionEmptyTitle = styled(IdentifyQRCodeTextButton)`
   margin-top: 15px;
-  border: 1px solid gray;
-  flex-direction: row;
-  height: 50px;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: center;
-  padding: 0 15px;
-  width: 45%;
+`;
+
+export const SuggestionEmptyButtonQRCode = styled.Pressable`
+  width: 60%;
+`;
+
+export const SuggestionEmptyQRCode = styled.View<iPressable>`
+  ${({ pressed, theme }) => css`
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    border: 1px solid ${theme.colors.secondaryGray};
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 10px 0;
+    border-radius: 8px;
+    ${pressed &&
+    css`
+      background-color: ${theme.colors.primaryGray};
+    `};
+  `};
 `;

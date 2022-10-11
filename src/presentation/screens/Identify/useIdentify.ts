@@ -1,6 +1,6 @@
 import { useRoute } from "@react-navigation/core";
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { serviceCheckinParticipants } from "services/checkin";
 import { IRootRouteProps, IRouterProps } from "_types/iNavigate";
@@ -10,11 +10,13 @@ import {
 } from "store/slices/awaitRequest";
 import { iParticipants } from "_types/iParticipants";
 import { iIdentify } from "_types/iIdentify";
+import { Keyboard } from "react-native";
 
 export function useIdentify() {
   const route = useRoute<IRootRouteProps<"Identify">>();
   const navigation = useNavigation<IRouterProps>();
   const [checkinCode, setCheckinCode] = useState("");
+  const [isOpenKeyboard, setIsOpenKeyboard] = useState(false);
   const [suggestionParticipants, setSuggestionParticipants] = useState<
     iParticipants[]
   >([]);
@@ -137,6 +139,20 @@ export function useIdentify() {
     }
   }
 
+  useEffect(() => {
+    const keyboardShowListener = Keyboard.addListener("keyboardDidShow", () => {
+      console.log("abriiu");
+      setIsOpenKeyboard(true);
+    });
+    const keyboardHideListener = Keyboard.addListener("keyboardDidHide", () => {
+      setIsOpenKeyboard(false);
+    });
+    return () => {
+      keyboardShowListener.remove();
+      keyboardHideListener.remove();
+    };
+  }, []);
+
   return {
     goBack,
     onCheckinParticipants,
@@ -148,6 +164,8 @@ export function useIdentify() {
     timesActivity: timesActivity ?? [],
     shouldRenderDays: timesActivity.length > 1,
     suggestionParticipants,
-    isOpenSuggestion: suggestionParticipants.length > 0
+    isOpenSuggestion: suggestionParticipants.length > 0,
+    shoulHiddeFooter: suggestionParticipants.length > 0 || isOpenKeyboard,
+    shouldRenderEmpty: checkinCode.length > 1
   };
 }

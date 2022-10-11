@@ -32,9 +32,9 @@ export function useHome() {
     }
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   getAllActivity();
-  // }, [getAllActivity]);
+  useEffect(() => {
+    getAllActivity();
+  }, [getAllActivity]);
 
   function onActionRequest() {
     if (isError) {

@@ -7,6 +7,7 @@ import { IconBack, IconQRCode, IconSearch } from "assets/icons";
 import { iPressable } from "_types/iPressable";
 import {
   ContainerIdentify,
+  IdentifyButtonQRCode,
   IdentifyFooter,
   IdentifyFooterTitle,
   IdentifyHeader,
@@ -18,10 +19,15 @@ import {
   IdentifyItemSuggestion,
   IdentifyNameSuggestion,
   IdentifyQRCode,
+  IdentifyQRCodeTextButton,
   IdentifySearch,
   IdentifySuggestion,
   IdentifyTextInput,
-  PressableBackStyle
+  PressableBackStyle,
+  SuggestionEmpty,
+  SuggestionEmptyButtonQRCode,
+  SuggestionEmptyQRCode,
+  SuggestionEmptyTitle
 } from "./style";
 import themes from "presentation/styles/defaultTheme";
 import { AwaitRequest } from "presentation/components";
@@ -34,6 +40,8 @@ export function Identify() {
     suggestionParticipants,
     isOpenSuggestion,
     checkinCode,
+    shoulHiddeFooter,
+    shouldRenderEmpty,
     onActionSucess,
     onChangeInput,
     goBack,
@@ -67,15 +75,15 @@ export function Identify() {
           <IdentifyIconSearch>
             <IconSearch />
           </IdentifyIconSearch>
+          <IdentifyButtonQRCode onPress={() => console.log("sou clique fora")}>
+            {({ pressed }: iPressable) => (
+              <IdentifyQRCode pressed={pressed}>
+                <IconQRCode />
+                <IdentifyQRCodeTextButton>Ler QRCode</IdentifyQRCodeTextButton>
+              </IdentifyQRCode>
+            )}
+          </IdentifyButtonQRCode>
           <IdentifySuggestion isOpen={isOpenSuggestion}>
-            <Pressable>
-              {({ pressed }: iPressable) => (
-                <IdentifyQRCode>
-                  <IconQRCode />
-                  <IdentifyNameSuggestion>QRCode</IdentifyNameSuggestion>
-                </IdentifyQRCode>
-              )}
-            </Pressable>
             <FlatList
               data={suggestionParticipants}
               keyboardShouldPersistTaps="handled"
@@ -101,11 +109,30 @@ export function Identify() {
                   )}
                 </Pressable>
               )}
+              ListEmptyComponent={() => (
+                <SuggestionEmpty shouldRenderEmpty={shouldRenderEmpty}>
+                  <SuggestionEmptyTitle>
+                    Sem correspondentes
+                  </SuggestionEmptyTitle>
+                  <SuggestionEmptyButtonQRCode
+                    onPress={() => console.log("sou clique demntro do empreu")}
+                  >
+                    {({ pressed }: iPressable) => (
+                      <SuggestionEmptyQRCode pressed={pressed}>
+                        <IconQRCode />
+                        <IdentifyQRCodeTextButton>
+                          Ler QRCode
+                        </IdentifyQRCodeTextButton>
+                      </SuggestionEmptyQRCode>
+                    )}
+                  </SuggestionEmptyButtonQRCode>
+                </SuggestionEmpty>
+              )}
             />
           </IdentifySuggestion>
         </IdentifySearch>
       </IdentifyHeader>
-      <IdentifyFooter isOpenIdentifySuggestion={isOpenSuggestion}>
+      <IdentifyFooter isOpenIdentifySuggestion={shoulHiddeFooter}>
         <IdentifyFooterTitle>{titleActivity}</IdentifyFooterTitle>
         {timesActivity.map(({ id_time, date, start_time, end_time }, index) => (
           <Fragment key={id_time}>
