@@ -30,7 +30,7 @@ import {
   SuggestionEmptyTitle
 } from "./style";
 import themes from "presentation/styles/defaultTheme";
-import { AwaitRequest } from "presentation/components";
+import { AwaitRequest, CameraIdentify } from "presentation/components";
 
 export function Identify() {
   const {
@@ -42,6 +42,8 @@ export function Identify() {
     checkinCode,
     shoulHiddeFooter,
     shouldRenderEmpty,
+    isOpenCamera,
+    onOpenCamera,
     onActionSucess,
     onChangeInput,
     goBack,
@@ -54,6 +56,7 @@ export function Identify() {
         titleFirstButton="Registrar outro"
         onPress={onActionSucess}
       />
+      <CameraIdentify isOpen={isOpenCamera} />
       <IdentifyHeader>
         <Pressable onPress={goBack} style={PressableBackStyle}>
           {({ pressed }: iPressable) => (
@@ -75,7 +78,7 @@ export function Identify() {
           <IdentifyIconSearch>
             <IconSearch />
           </IdentifyIconSearch>
-          <IdentifyButtonQRCode onPress={() => console.log("sou clique fora")}>
+          <IdentifyButtonQRCode onPress={onOpenCamera}>
             {({ pressed }: iPressable) => (
               <IdentifyQRCode pressed={pressed}>
                 <IconQRCode />
