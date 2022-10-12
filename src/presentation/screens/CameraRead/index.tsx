@@ -24,18 +24,25 @@ import {
 } from "./style";
 import { iPressable } from "_types/iPressable";
 import { IconClose } from "assets/icons";
+import { ModalAlert } from "presentation/components";
 
 export function CameraRead() {
-  const devices = useCameraDevices("wide-angle-camera");
-  const device = devices.back as CameraDevice;
-  const shouldHiddenCamera = device == null;
   const [frameProcessor, barcodes] = useScanBarcodes([BarcodeFormat.QR_CODE], {
     checkInverted: true
   });
-  const { goBack } = useCameraRead({ barcodes });
+  const devices = useCameraDevices("wide-angle-camera");
+  const device = devices.back as CameraDevice;
+  const { isReadingQRCode, goBack, onCancelModal } = useCameraRead({
+    barcodes
+  });
+  const shouldHiddenCamera = device == null || !isReadingQRCode;
 
   return (
     <ContainerCameraRead>
+      <ModalAlert
+        onAction={() => console.log("da camera")}
+        onActionCancel={onCancelModal}
+      />
       {shouldHiddenCamera ? (
         <CameraIdentifyAwait>
           <CameraIdentifyTitle>Aguardando câmera...</CameraIdentifyTitle>
@@ -61,6 +68,7 @@ export function CameraRead() {
             <CameraIdentifyFooter>
               <CameraIdentifyFooterText>
                 Coloque o QRCode na aréa da câmera
+                {isReadingQRCode ? "true" : "false"}
               </CameraIdentifyFooterText>
             </CameraIdentifyFooter>
           </CameraIdentifyBody>

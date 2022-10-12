@@ -4,30 +4,26 @@ import { images } from "assets/images";
 import { Pressable } from "react-native";
 import { IRouterProps } from "_types/iNavigate";
 import { iPressable } from "_types/iPressable";
-import { AwaitRequest, ModalAlert } from "presentation/components";
+import { AwaitRequest } from "presentation/components";
 import { useHome } from "./useHome";
 import {
   ContainerHome,
-  FooterText,
   HomeBox,
   HomeBoxBody,
   HomeBoxHeader,
   HomeBoxImage,
-  HomeBoxToday,
   HomeCardTitle,
-  HomeFooter,
   HomeSubTitle,
   HomeTitle
 } from "./style";
 
 export function Home() {
   const navigation = useNavigation<IRouterProps>();
-  const { onActionRequest, isOnline, testeOpemmodal } = useHome();
+  const { onActionRequest } = useHome();
 
   return (
     <ContainerHome>
       <AwaitRequest onPress={onActionRequest} />
-      <ModalAlert onAction={() => console.log("teste")} />
       <HomeBoxHeader>
         <HomeTitle>Frequência SNCT 2022</HomeTitle>
         <HomeSubTitle>Registro de presença.</HomeSubTitle>
@@ -48,8 +44,8 @@ export function Home() {
               <HomeBoxImage source={images.Today} resizeMode="contain" />
             </HomeBoxToday>
           )}
-        </Pressable>
-        <Pressable onPress={() => navigation.navigate("ListAllActivity")}>
+        </Pressable> */}
+        {/* <Pressable onPress={() => navigation.navigate("ListAllActivity")}>
           {({ pressed }: iPressable) => (
             <HomeBoxToday pressed={pressed}>
               <HomeCardTitle>Prontos para{"\n"}sincronizar</HomeCardTitle>

@@ -21,17 +21,24 @@ export function ModalAlert({ onAction, onActionCancel }: iModalAlert) {
     useModalAlert();
   const shouldRenderTwoButtons =
     typeof onAction !== undefined && typeof onActionCancel !== undefined;
+
+  function onHandleCancel() {
+    if (onActionCancel !== undefined) {
+      onActionCancel();
+    }
+    onDismiss();
+  }
   return (
     <Modal
       animationType="fade"
       visible={isOpen}
       transparent
-      onRequestClose={onDismiss}
+      onRequestClose={onHandleCancel}
     >
       <ContainerModalAlert>
-        <ModalAlertDismiss onPress={onDismiss} />
+        <ModalAlertDismiss onPress={onHandleCancel} />
         <ModalAlertInside>
-          <Pressable onPress={onDismiss}>
+          <Pressable onPress={onHandleCancel}>
             {({ pressed }: iPressable) => (
               <ModalAlertClose pressed={pressed}>
                 <IconClose />
@@ -43,8 +50,17 @@ export function ModalAlert({ onAction, onActionCancel }: iModalAlert) {
           <ModalButtons>
             {shouldRenderTwoButtons ? (
               <>
-                <Button title={textActionCancel} style={sizeButton} />
-                <Button variant="blue" title={textAction} style={sizeButton} />
+                <Button
+                  title={textActionCancel}
+                  style={sizeButton}
+                  onPress={onHandleCancel}
+                />
+                <Button
+                  variant="blue"
+                  title={textAction}
+                  style={sizeButton}
+                  onPress={onAction}
+                />
               </>
             ) : null}
           </ModalButtons>
