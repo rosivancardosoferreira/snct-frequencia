@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCameraRead } from "./useCameraRead";
+import { useScanBarcodes, BarcodeFormat } from "vision-camera-code-scanner";
 import {
   Camera,
   CameraDevice,
@@ -16,7 +17,11 @@ export function CameraRead() {
   const devices = useCameraDevices("wide-angle-camera");
   const device = devices.back as CameraDevice;
   const shouldHiddenCamera = device == null;
-  const { tem } = useCameraRead();
+  const [frameProcessor, barcodes] = useScanBarcodes([BarcodeFormat.QR_CODE], {
+    checkInverted: true
+  });
+  const { tem } = useCameraRead({ barcodes });
+
   return (
     <ContainerCameraRead>
       {shouldHiddenCamera ? (
@@ -24,7 +29,13 @@ export function CameraRead() {
           <CameraIdentifyTitle>Aguardando câmera...</CameraIdentifyTitle>
         </CameraIdentifyAwait>
       ) : (
-        <Camera style={fullCamera} device={device} isActive={true} />
+        <Camera
+          style={fullCamera}
+          device={device}
+          isActive={true}
+          frameProcessor={frameProcessor}
+          frameProcessorFps={7}
+        />
       )}
     </ContainerCameraRead>
   );

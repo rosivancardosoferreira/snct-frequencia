@@ -1,8 +1,9 @@
 import { useCallback, useEffect } from "react";
 import { Linking } from "react-native";
 import { Camera } from "react-native-vision-camera";
+import { iUseCameraRead } from "_types/iCameraRead";
 
-export function useCameraRead() {
+export function useCameraRead({ barcodes }: iUseCameraRead) {
   const requestCameraPermission = useCallback(async () => {
     const permission = await Camera.requestCameraPermission();
     if (permission === "denied") await Linking.openSettings();
@@ -11,5 +12,18 @@ export function useCameraRead() {
   useEffect(() => {
     requestCameraPermission();
   }, [requestCameraPermission]);
+
+  useEffect(() => {
+    const listeningBarCodes = async () => {
+      barcodes.forEach(async (scan: any) => {
+        if (scan?.rowValue !== "") {
+          console.log(scan?.rowValue ?? "ou alguam coisa");
+        }
+      });
+    };
+    listeningBarCodes();
+    console.log("mudou");
+  }, [barcodes]);
+
   return { tem: true };
 }
