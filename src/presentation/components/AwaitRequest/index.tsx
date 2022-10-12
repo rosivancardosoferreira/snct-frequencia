@@ -45,9 +45,9 @@ export function AwaitRequest({ onPress, titleFirstButton }: iAwaitRequest) {
         {renderButtonAction && (
           <RequestError>
             <Button title={titlePrimaryButton} onPress={onPress} bottom={10} />
-            {renderButtonCancel && (
+            {/* {renderButtonCancel && (
               <Button title="Cancelar" onPress={onDismiss} />
-            )}
+            )} */}
           </RequestError>
         )}
       </ContainerAwaitRequest>

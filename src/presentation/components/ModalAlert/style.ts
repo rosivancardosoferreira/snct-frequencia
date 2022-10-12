@@ -4,7 +4,7 @@ import { iPressable } from "_types/iPressable";
 export const ModalStyle = styled.Modal``;
 
 export const ContainerModalAlert = styled.View`
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   flex: 1;
   align-items: center;
   justify-content: center;

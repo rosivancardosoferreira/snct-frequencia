@@ -2,6 +2,9 @@ import React from "react";
 import { Pressable } from "react-native";
 import { useCameraRead } from "./useCameraRead";
 import { useScanBarcodes, BarcodeFormat } from "vision-camera-code-scanner";
+import { iPressable } from "_types/iPressable";
+import { IconClose } from "assets/icons";
+import { AwaitRequest, ModalAlert } from "presentation/components";
 import {
   Camera,
   CameraDevice,
@@ -22,9 +25,6 @@ import {
   CameraIdentifyBody,
   UtilBar
 } from "./style";
-import { iPressable } from "_types/iPressable";
-import { IconClose } from "assets/icons";
-import { ModalAlert } from "presentation/components";
 
 export function CameraRead() {
   const [frameProcessor, barcodes] = useScanBarcodes([BarcodeFormat.QR_CODE], {
@@ -32,15 +32,27 @@ export function CameraRead() {
   });
   const devices = useCameraDevices("wide-angle-camera");
   const device = devices.back as CameraDevice;
-  const { isReadingQRCode, goBack, onCancelModal } = useCameraRead({
+  const {
+    isReadingQRCode,
+    buttonAwaitRequest,
+    goBack,
+    onCancelModal,
+    onActionPressAwait,
+    onCheckinParticipants
+  } = useCameraRead({
     barcodes
   });
   const shouldHiddenCamera = device == null || !isReadingQRCode;
 
   return (
     <ContainerCameraRead>
+      <AwaitRequest
+        titleFirstButton={buttonAwaitRequest}
+        onPress={onActionPressAwait}
+      />
       <ModalAlert
-        onAction={() => console.log("da camera")}
+        clickOnDismiss={false}
+        onAction={onCheckinParticipants}
         onActionCancel={onCancelModal}
       />
       {shouldHiddenCamera ? (
@@ -68,7 +80,6 @@ export function CameraRead() {
             <CameraIdentifyFooter>
               <CameraIdentifyFooterText>
                 Coloque o QRCode na aréa da câmera
-                {isReadingQRCode ? "true" : "false"}
               </CameraIdentifyFooterText>
             </CameraIdentifyFooter>
           </CameraIdentifyBody>
@@ -77,7 +88,7 @@ export function CameraRead() {
             device={device}
             isActive={true}
             frameProcessor={frameProcessor}
-            frameProcessorFps={7}
+            frameProcessorFps={2}
           />
         </CameraIdentifyInside>
       )}

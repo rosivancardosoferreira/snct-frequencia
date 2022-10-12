@@ -9,18 +9,22 @@ import {
 } from "store/slices/awaitRequest";
 import { changeAllActivitys } from "store/slices/allActivitys";
 import { changeModalAlert } from "store/slices/modalAlert";
+import { serviceAllParticipants } from "services/participants";
+import { changeAllParticipants } from "store/slices/participants";
 
 export function useHome() {
   const dispatch = useDispatch();
   const { type } = useSelector(selectAwaitRequest);
   const isError = type === "error";
 
-  const getAllActivity = useCallback(async () => {
+  const getAllActivityAndParticipants = useCallback(async () => {
     dispatch(changeAwaitRequest({ type: "await", isOpen: true }));
     try {
-      const result = await serviceAllActivitys();
+      const resultAcvitys = await serviceAllActivitys();
+      const resultParticipants = await serviceAllParticipants();
+      dispatch(changeAllParticipants(resultParticipants.data.data));
+      dispatch(changeAllActivitys(resultAcvitys.data.data));
       dispatch(resetAwaitRequest());
-      dispatch(changeAllActivitys(result.data.data));
     } catch (e: any) {
       dispatch(
         changeAwaitRequest({
@@ -33,12 +37,12 @@ export function useHome() {
   }, [dispatch]);
 
   useEffect(() => {
-    getAllActivity();
-  }, [getAllActivity]);
+    getAllActivityAndParticipants();
+  }, [getAllActivityAndParticipants]);
 
   function onActionRequest() {
     if (isError) {
-      getAllActivity();
+      getAllActivityAndParticipants();
     }
     return 0;
   }

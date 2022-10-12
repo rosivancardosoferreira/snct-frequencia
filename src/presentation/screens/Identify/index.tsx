@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Moment from "moment";
-import { FlatList, Keyboard, Pressable } from "react-native";
+import { FlatList, Pressable } from "react-native";
 import { useIdentify } from "./useIdentify";
 import { HeaderActivityBack } from "presentation/components/HeaderActivity/style";
 import { IconBack, IconQRCode, IconSearch } from "assets/icons";
@@ -30,7 +30,11 @@ import {
   SuggestionEmptyTitle
 } from "./style";
 import themes from "presentation/styles/defaultTheme";
-import { AwaitRequest, CameraIdentify } from "presentation/components";
+import {
+  AwaitRequest,
+  CameraIdentify,
+  ModalAlert
+} from "presentation/components";
 
 export function Identify() {
   const {
@@ -46,16 +50,18 @@ export function Identify() {
     onActionSucess,
     onChangeInput,
     goBack,
-    onCheckinParticipants
+    onCheckinParticipants,
+    onConfirmIdentify
   } = useIdentify();
 
   return (
     <ContainerIdentify>
       <AwaitRequest
-        titleFirstButton="Registrar outro"
+        titleFirstButton="Credenciar outro"
         onPress={onActionSucess}
       />
       <CameraIdentify isOpen={false} />
+      <ModalAlert onAction={onCheckinParticipants} />
       <IdentifyHeader>
         <Pressable onPress={goBack} style={PressableBackStyle}>
           {({ pressed }: iPressable) => (
@@ -93,10 +99,14 @@ export function Identify() {
                 <Pressable
                   key={item?.id_attendees}
                   onPress={() => {
-                    Keyboard.dismiss();
-                    onCheckinParticipants({
-                      id_attendees: item?.id_attendees
+                    onConfirmIdentify({
+                      id_attendees: item?.id_attendees,
+                      name: item?.name
                     });
+                    // Keyboard.dismiss();
+                    // onCheckinParticipants({
+                    //   id_attendees: item?.id_attendees
+                    // });
                   }}
                 >
                   {({ pressed }: iPressable) => (
@@ -116,9 +126,7 @@ export function Identify() {
                   <SuggestionEmptyTitle>
                     Sem correspondentes
                   </SuggestionEmptyTitle>
-                  <SuggestionEmptyButtonQRCode
-                    onPress={() => console.log("sou clique demntro do empreu")}
-                  >
+                  <SuggestionEmptyButtonQRCode onPress={onOpenCamera}>
                     {({ pressed }: iPressable) => (
                       <SuggestionEmptyQRCode pressed={pressed}>
                         <IconQRCode />

@@ -1,6 +1,7 @@
 export interface iModalAlert {
   onAction?: () => void;
   onActionCancel?: () => void;
+  clickOnDismiss?: boolean;
 }
 
 export interface iSliceModalAlert {

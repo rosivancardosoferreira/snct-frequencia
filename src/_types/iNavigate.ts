@@ -5,11 +5,15 @@ import { iCardItem } from "./iActivity";
 interface IdentifyParams
   extends Pick<iCardItem, "title" | "times" | "id_session"> {}
 
+interface CameraReadParams {
+  id_session: number;
+}
+
 export type RootStackParamList = {
   Home: undefined;
   ListAllActivity: undefined;
   Identify: IdentifyParams;
-  CameraRead: undefined;
+  CameraRead: CameraReadParams;
 };
 
 export type IRootRouteProps<RouteName extends keyof RootStackParamList> =

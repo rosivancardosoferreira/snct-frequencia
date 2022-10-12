@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { awaitRequest } from "./slices/awaitRequest";
 import { allActivitys } from "./slices/allActivitys";
 import { modalAlert } from "./slices/modalAlert";
+import { participants } from "./slices/participants";
 
 const store = configureStore({
   reducer: {
     awaitRequest,
     allActivitys,
-    modalAlert
+    modalAlert,
+    participants
   }
 });
 

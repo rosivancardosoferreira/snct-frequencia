@@ -16,7 +16,11 @@ import {
 } from "./style";
 import { useModalAlert } from "./useModalAlert";
 
-export function ModalAlert({ onAction, onActionCancel }: iModalAlert) {
+export function ModalAlert({
+  onAction,
+  onActionCancel,
+  clickOnDismiss = true
+}: iModalAlert) {
   const { onDismiss, isOpen, title, message, textAction, textActionCancel } =
     useModalAlert();
   const shouldRenderTwoButtons =
@@ -28,6 +32,13 @@ export function ModalAlert({ onAction, onActionCancel }: iModalAlert) {
     }
     onDismiss();
   }
+
+  function onBackgroundDismiss() {
+    if (clickOnDismiss) {
+      return onHandleCancel();
+    }
+    return console.log("sem clique");
+  }
   return (
     <Modal
       animationType="fade"
@@ -36,7 +47,7 @@ export function ModalAlert({ onAction, onActionCancel }: iModalAlert) {
       onRequestClose={onHandleCancel}
     >
       <ContainerModalAlert>
-        <ModalAlertDismiss onPress={onHandleCancel} />
+        <ModalAlertDismiss onPress={onBackgroundDismiss} />
         <ModalAlertInside>
           <Pressable onPress={onHandleCancel}>
             {({ pressed }: iPressable) => (
