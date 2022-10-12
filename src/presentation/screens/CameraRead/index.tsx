@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Pressable } from "react-native";
 import { useCameraRead } from "./useCameraRead";
 import { useScanBarcodes, BarcodeFormat } from "vision-camera-code-scanner";
 import {
@@ -8,10 +9,18 @@ import {
 } from "react-native-vision-camera";
 import {
   CameraIdentifyAwait,
+  CameraIdentifyHeader,
+  CameraIdentifyHeaderBack,
+  CameraIdentifyInside,
   CameraIdentifyTitle,
   ContainerCameraRead,
-  fullCamera
+  PressableBackStyle,
+  fullCamera,
+  CameraIdentifyFooter,
+  CameraIdentifyFooterText
 } from "./style";
+import { iPressable } from "_types/iPressable";
+import { IconClose } from "assets/icons";
 
 export function CameraRead() {
   const devices = useCameraDevices("wide-angle-camera");
@@ -20,7 +29,7 @@ export function CameraRead() {
   const [frameProcessor, barcodes] = useScanBarcodes([BarcodeFormat.QR_CODE], {
     checkInverted: true
   });
-  const { tem } = useCameraRead({ barcodes });
+  const { goBack } = useCameraRead({ barcodes });
 
   return (
     <ContainerCameraRead>
@@ -29,13 +38,29 @@ export function CameraRead() {
           <CameraIdentifyTitle>Aguardando câmera...</CameraIdentifyTitle>
         </CameraIdentifyAwait>
       ) : (
-        <Camera
-          style={fullCamera}
-          device={device}
-          isActive={true}
-          frameProcessor={frameProcessor}
-          frameProcessorFps={7}
-        />
+        <CameraIdentifyInside>
+          <CameraIdentifyHeader>
+            <Pressable onPress={goBack} style={PressableBackStyle}>
+              {({ pressed }: iPressable) => (
+                <CameraIdentifyHeaderBack pressed={pressed}>
+                  <IconClose />
+                </CameraIdentifyHeaderBack>
+              )}
+            </Pressable>
+          </CameraIdentifyHeader>
+          <Camera
+            style={fullCamera}
+            device={device}
+            isActive={true}
+            frameProcessor={frameProcessor}
+            frameProcessorFps={7}
+          />
+          <CameraIdentifyFooter>
+            <CameraIdentifyFooterText>
+              Coloque o QRCode na aréa da câmera
+            </CameraIdentifyFooterText>
+          </CameraIdentifyFooter>
+        </CameraIdentifyInside>
       )}
     </ContainerCameraRead>
   );

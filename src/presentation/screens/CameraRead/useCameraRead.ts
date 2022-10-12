@@ -1,9 +1,12 @@
+import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect } from "react";
 import { Linking } from "react-native";
 import { Camera } from "react-native-vision-camera";
 import { iUseCameraRead } from "_types/iCameraRead";
+import { IRouterProps } from "_types/iNavigate";
 
 export function useCameraRead({ barcodes }: iUseCameraRead) {
+  const navigation = useNavigation<IRouterProps>();
   const requestCameraPermission = useCallback(async () => {
     const permission = await Camera.requestCameraPermission();
     if (permission === "denied") await Linking.openSettings();
@@ -25,5 +28,9 @@ export function useCameraRead({ barcodes }: iUseCameraRead) {
     console.log("mudou");
   }, [barcodes]);
 
-  return { tem: true };
+  function goBack() {
+    navigation.goBack();
+  }
+
+  return { goBack };
 }
