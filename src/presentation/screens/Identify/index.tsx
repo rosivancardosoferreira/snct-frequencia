@@ -42,7 +42,6 @@ export function Identify() {
     checkinCode,
     shoulHiddeFooter,
     shouldRenderEmpty,
-    isOpenCamera,
     onOpenCamera,
     onActionSucess,
     onChangeInput,
@@ -56,7 +55,7 @@ export function Identify() {
         titleFirstButton="Registrar outro"
         onPress={onActionSucess}
       />
-      <CameraIdentify isOpen={isOpenCamera} />
+      <CameraIdentify isOpen={false} />
       <IdentifyHeader>
         <Pressable onPress={goBack} style={PressableBackStyle}>
           {({ pressed }: iPressable) => (

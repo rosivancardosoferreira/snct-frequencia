@@ -17,7 +17,6 @@ export function useIdentify() {
   const navigation = useNavigation<IRouterProps>();
   const [checkinCode, setCheckinCode] = useState("");
   const [isOpenKeyboard, setIsOpenKeyboard] = useState(false);
-  const [isOpenCamera, setIsOpenCamera] = useState(false);
   const [suggestionParticipants, setSuggestionParticipants] = useState<
     iParticipants[]
   >([]);
@@ -160,7 +159,7 @@ export function useIdentify() {
     onSearchParticipants,
     onChangeInput,
     onActionSucess,
-    onOpenCamera: () => setIsOpenCamera(true),
+    onOpenCamera: () => navigation.navigate("CameraRead"),
     checkinCode,
     titleActivity,
     timesActivity: timesActivity ?? [],
@@ -168,7 +167,6 @@ export function useIdentify() {
     suggestionParticipants,
     isOpenSuggestion: suggestionParticipants.length > 0,
     shoulHiddeFooter: suggestionParticipants.length > 0 || isOpenKeyboard,
-    shouldRenderEmpty: checkinCode.length > 1,
-    isOpenCamera
+    shouldRenderEmpty: checkinCode.length > 1
   };
 }

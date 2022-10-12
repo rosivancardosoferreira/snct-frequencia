@@ -9,6 +9,7 @@ export type RootStackParamList = {
   Home: undefined;
   ListAllActivity: undefined;
   Identify: IdentifyParams;
+  CameraRead: undefined;
 };
 
 export type IRootRouteProps<RouteName extends keyof RootStackParamList> =
